@@ -1,0 +1,27 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.luxomega.iceberg'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.luxomega.iceberg"
+        minSdk 24
+        targetSdk 34
+        versionCode 54
+        versionName "5.4"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}

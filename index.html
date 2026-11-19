@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUX-Ω (v5.4) — Iceberg Multi-Layer</title>
+  <style>
+    body {
+      margin: 0;
+      background: #070b14;
+      color: #e2e8f0;
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #0b1220;
+      border-bottom: 1px solid #1e3a5f;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 16px;
+      color: #22d3ee;
+    }
+    main {
+      flex: 1;
+      padding: 16px;
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    .box {
+      background: #0d1422;
+      border: 1px solid #1e3a5f;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .cmd-bar {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      background: #0b1220;
+      border-top: 1px solid #1e3a5f;
+      position: sticky;
+      bottom: 0;
+    }
+    input {
+      flex: 1;
+      background: #070b14;
+      border: 1px solid #334155;
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    button.send {
+      background: #0891b2;
+      color: #fff;
+      border: none;
+      padding: 0 16px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧊 LUX-Ω (v5.4) — Terminal Mobile Iceberg</h1>
+    <span style="font-size:11px;color:#34d399;">Bridge Nativa Ativa</span>
+  </header>
+
+  <main id="chat-messages">
+    <div class="box">
+      <strong style="color:#38bdf8;">Ponte Android Nativa Inicializada (127.0.0.1:8765)</strong><br>
+      • Abra o <b>Orbot</b> e toque em <i>Iniciar</i> para ativar o túnel Tor (<code>127.0.0.1:9050</code>).<br>
+      • Toque em <b>⚙ Config 2B</b> no canto inferior direito para testar os proxies.<br>
+      • Digite abaixo: <code>pesquisar iceberg sua consulta</code> ou <code>acessar onion endereco.onion</code>.<br>
+      <span style="color:#94a3b8;font-size:12px;">(Dica: substitua este arquivo pelo seu <code>index.html</code> completo da LUX-Ω mantendo a tag <code>&lt;script src="./lux_iceberg_addon.js"&gt;&lt;/script&gt;</code>.)</span>
+    </div>
+  </main>
+
+  <div class="cmd-bar">
+    <input id="mobile-cmd-input" type="text" placeholder="pesquisar iceberg ... ou inspecionar url ..." />
+    <button class="send" id="mobile-cmd-btn">Enviar</button>
+  </div>
+
+  <script src="./lux_iceberg_addon.js"></script>
+  <script>
+    const inp = document.getElementById("mobile-cmd-input");
+    const btn = document.getElementById("mobile-cmd-btn");
+    btn.onclick = async () => {
+      const val = inp.value.trim();
+      if (!val || !window.LUX_ICEBERG) return;
+      inp.value = "";
+      const handled = await window.LUX_ICEBERG.handleDirectChatCommand(val);
+      if (!handled) {
+        await window.LUX_ICEBERG.executeIcebergSearch(val);
+      }
+    };
+  </script>
+</body>
+</html>
